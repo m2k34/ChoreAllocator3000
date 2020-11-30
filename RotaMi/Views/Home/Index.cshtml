@@ -1,0 +1,49 @@
+﻿@model List<RotaMi.Models.User> 
+
+@{
+    ViewBag.Title = "Home Page";
+    
+}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<style>
+    form {
+        
+
+        font-size:30px;
+        margin: 0;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    
+    }
+</style>
+
+<body>
+
+
+    <form action="/home/Index" method="post">
+
+        <label>Select your name: </label>
+        <select name="Name" >
+            @foreach (var user in Model)
+            {
+                <option value="@user.Name" na>@user.Name</option>
+            }
+        </select>
+        <br><br>
+        <input type="submit" value="Login">
+
+
+    </form>
+
+
+
+</body>

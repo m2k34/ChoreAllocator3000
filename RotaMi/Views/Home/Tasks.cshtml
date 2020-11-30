@@ -1,0 +1,122 @@
+﻿@model RotaMi.Models.TasksViewModel
+
+@{
+    ViewBag.Title = "Tasks";
+
+}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <style>
+
+        .centre {
+            margin: 0;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align:center;
+        }
+        h1{
+            padding-bottom:60px;
+        }
+        table{
+            font-size:25px;
+        }
+        th {
+            padding-bottom: 0.5em;
+            padding-right: 1em;
+
+        }
+        .first-row > th {
+            border-bottom: 1px solid black;
+            border-spacing:0;
+            
+        }
+
+        button {
+            font-size: 20px;
+            position: relative;
+            top: 100px;
+            
+        }
+
+        .heading{
+            display: inline-block;
+        }
+        .signout {
+            position: absolute;
+            left: 80%;
+            top: 4%;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <form action="/home/Index">
+            <button class="signout ui button">signout</button>
+        </form>
+        
+
+    </div>
+    <div class="centre">
+    
+        <h1 style="">
+            Welcome  @Model.CurrentUser.Name
+        </h1>
+            
+    
+        <div>
+            <table class="">
+
+
+
+                <tr class="first-row">
+                    <th>Person</th>
+                    <th>Chore</th>
+                    <th>Done?</th>
+                </tr>
+
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <th>@user.Name</th>
+                        <th>@user.Task.Name</th>
+                        @if (user.Task.IsComplete == true)
+                        {
+                            <th>
+                                <i class="thumbs up outline icon"></i>
+                            </th>
+                        }
+                        else
+                        {
+
+                            <th>
+                                <i class="thumbs down outline icon"></i>
+                            </th>
+                        }
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+        <form action="/home/MarkComplete" method="post">
+            @if (Model.CurrentUser.Task.IsComplete)
+            {
+                <button type="submit" disabled style="font-size:20px" class="ui button">Completed</button>
+            }
+            else
+            {
+                <button type="submit" style="font-size:20px" class="ui button">Mark Complete</button>
+            }
+
+        </form>
+
+    </div>
+
+
+</body>
